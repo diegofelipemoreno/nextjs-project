@@ -1,0 +1,72 @@
+@import "../common/_colors";
+@import "../common/_breakpoints";
+
+.header {
+   align-items: center;
+
+    &:after {
+     background-color: $white;
+     content: '';
+     height: 110px;
+     left: 0;
+     position: absolute;
+     top: 0;
+     width: 100%;
+     z-index: 0;
+   }
+ 
+   &__container {
+     align-items: center;
+     display: flex;
+     flex-direction: row;
+     grid-column: 1/-1;
+     grid-row: 1;
+     height: 110px;
+     margin: 0 auto;
+     z-index: 1;
+   }
+
+   &__nav {
+    background-color: $white;
+    grid-column: 1/-1;
+    grid-row: 3;
+    z-index: 1;
+   }
+
+   &__navItems {
+    margin: 20px;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+   }
+
+   &__navItem {
+    display: inline-block;
+    margin-right: 1rem;
+   }
+
+   &__loginWrapper {
+    display: flex;
+    flex-direction: row;
+    grid-column: 1/-1;
+    grid-row: 2;
+    z-index: 1;
+   }
+
+   @include large() {
+      &__container {
+          grid-row: 1;
+          grid-column: 1/4;
+      }
+
+      &__nav {
+          grid-row: 1;
+          grid-column: 10/-1;
+      }
+
+      &__loginWrapper {
+          grid-row: 1;
+          grid-column: 4/10;
+      }
+   }
+ }

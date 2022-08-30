@@ -1,0 +1,14 @@
+.grid {
+    display: grid;
+    grid-column-gap: 6.67%;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0 auto;
+    min-width: 300px;
+  
+    @include large() {
+      grid-gap: 2.19%;
+      grid-template-columns: repeat(12, 1fr);
+      margin: 0 80px;
+      max-width: 1920px;
+    }
+}

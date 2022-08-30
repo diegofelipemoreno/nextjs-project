@@ -1,0 +1,29 @@
+@import "../common/_breakpoints";
+
+.home {
+    margin: 32px;
+
+    &__img {
+        grid-column: 1/-1;
+        grid-row: 1;
+    }
+
+    &__masthead{
+        grid-column: 1/-1;
+        grid-row: 2;
+    }
+
+    @include large() {
+        margin: 60px 0;
+
+        &__img {
+            grid-column: 2/6;
+            grid-row: 1;
+        }
+    
+        &__masthead{
+            grid-column: 7/11;
+            grid-row: 1;
+        }
+    }
+}

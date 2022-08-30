@@ -1,0 +1,37 @@
+@import "../common/_colors";
+@import "../common/_breakpoints";
+
+.login {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0;
+    background-color: $smoke;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    &__masthead {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    &__img {
+        border-radius: 150px;
+        width: 60px;
+        overflow: hidden;
+        background-color: $black;
+        display: flex;
+        align-items: center;
+        margin: 0 20px;
+    }
+
+
+    @include large() {
+        flex-direction: row;
+    }
+}

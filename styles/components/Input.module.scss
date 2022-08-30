@@ -1,0 +1,22 @@
+@import "../common/_colors";
+
+.input {
+    border-radius: 5px;
+    padding: 6px;
+    color: $black;
+    margin-bottom: 16px;
+    flex-direction: column;
+
+    &__error {
+        color: $error; 
+    }
+
+    &__label {
+        font-size: 14px;
+        margin: 8px;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+}
