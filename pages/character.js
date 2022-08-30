@@ -1,6 +1,7 @@
 // Framework dependencies
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from 'next/head';
+import { useDispatch, useSelector } from "react-redux";
 
 // Local dependencies
 import Layout from '../components/layout';
@@ -10,21 +11,24 @@ import CardGallery from '../components/card-gallery';
 import style from '../styles/views/Character.module.scss';
 import {requestUtil} from '../lib/utils';
 import {CHARACTER_FORM, CHARACTER_PAGE_TITLE} from '../constants';
+import { setSearchState, getSearchState } from '../reducers/searchSlice';
 
 export default function Character() {
-    const [isValidForm, setIsValidForm] = useState(true);
+    const [isValidForm, setIsValidForm] = useState(false);
     const [results, setResults] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
     const [fieldsDict, setFieldsDict] = useState(CHARACTER_FORM.FIELDS);
+    const searchState = useSelector(getSearchState);
+    const dispatch = useDispatch();
 
     const fetchData = async(query) => {
-        const {statusCode, body} = 
+        const {body} = 
             await requestUtil(`/api/character?name=${query}`).then((res) => res);
+        const bodyResponse = await body;
+        const results = bodyResponse?.length ? bodyResponse : [];
 
-        if (statusCode === 200) {
-            setResults(await body);
-        } else {
-            setResults([]);
-        }
+        setResults(results);
+        dispatch(setSearchState({query, results }));
     }
 
     const onSubmit = (event) => {
@@ -33,6 +37,7 @@ export default function Character() {
         if (isValidForm) {
             const query = fieldsDict.character.value;
 
+            setSearchValue(query);       
             fetchData(query);  
         }
     }
@@ -53,6 +58,15 @@ export default function Character() {
             }
         });
     }
+
+    useEffect(() => {
+        const {search} = searchState;
+
+        if (search && search?.query) {
+            setResults(search.results);
+            setSearchValue(search.query);
+        }
+    }, [searchState]);
 
     return (
         <Layout>
@@ -79,6 +93,7 @@ export default function Character() {
                 </div>
                 <div className={style.character__galleryWrapper}>
                     <CardGallery
+                    title={`${searchValue} results`}
                     results={results}
                     />
                 </div>

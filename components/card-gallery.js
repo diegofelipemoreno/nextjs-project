@@ -5,10 +5,11 @@ import Image from 'next/image';
 import style from '../styles/components/CardGallery.module.scss';
 import {NO_RESULTS_TEXT} from '../constants';
 
-export default function CardGallery({results}) {
+export default function CardGallery({results, title}) {
 
   return (
     <section className={style.cardGallery}>
+        <h3>{title}</h3>
         {results?.length ? (
             <ul className={style.cardGallery__listItem}>
                 {results.map((elem) => (

@@ -35,7 +35,7 @@ export const NAV_CONTENT = {
     },
     EPISODE: {
         label: 'Episode',
-        path: '/episode'
+        path: '/episode/1'
     }
 };
 

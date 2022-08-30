@@ -1,34 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project for the The Rick and Morty API.
+
+Here you can check the production site: [https://nextjs-api-project.vercel.app/](https://nextjs-api-project.vercel.app/)
+
+![alt text](https://github.com/diegofelipemoreno/nextjs-project/blob/main/cover.jpg?raw=true)
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-```
+Node version v16.13.2
 
+# Install dependencies
+npm install
+# or
+yarn install
+
+# Run in development mode
+npm run dev
+```
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Tech Requirements
+- The Project was developed with the ReactJs and Redux.
+- SASS style preprocessor with BEM pattern.
+- The website is responsive in mobile and desktop viewport.
+- Nextjs for the API logic and page side .rendering.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## SASS
+The structure to create the components styling is in the folders ./styles, where you can find 3 folder:
+- ./styles/common: You can find all the globals, grid, colors, utils that are across al the components/site.
+- ./styles/components: You can find all the styles of the components by name. E.g Button.module.scss 
+_ ./styles/views: Styles to build the views or pages that are made with the components. 
+   This styles only affect the component's layout, they are not meant to overwrite them.
 
-## Learn More
+All the styling is designing with first mobile and BEM pattern.
 
-To learn more about Next.js, take a look at the following resources:
+![alt text](https://github.com/diegofelipemoreno/nextjs-project/blob/main/styles.jpg?raw=true)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## CSS Grid
+The website counts with a grid system that allows to fit the components and views in different screens sizes in accurate way.
+- Desktop 12 columns, 32px margin
+- Mobile 4 columns, 16px
+You can check the file ./styles/common/_grid.scss to check the specific configuration.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![alt text](https://github.com/diegofelipemoreno/nextjs-project/blob/main/grid-desktop.jpg?raw=true)
+![alt text](https://github.com/diegofelipemoreno/nextjs-project/blob/main/grid-mobile.jpg?raw=true)
 
-## Deploy on Vercel
+## Components
+On ./components folder you can find the components that can be reuse in other places of the website, so they
+have parameters in order to be agnostic and flexible.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Model data
+All the data that are injected on the components, views, pages can be found on the ./constants.js. So any website content
+can be easily found and edited. Also a possible l10n will be easier.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## State
+The website uses a state where the useAuth, search results and current user data can be found and also share for all the 
+website if is needed.
+Redux structure:
+./store
+./reducers/*
+
+![alt text](https://github.com/diegofelipemoreno/nextjs-project/blob/main/state.jpg?raw=true)
+
+## API Routes
+To work and secure the Rick Morty API and also develop the Login and Authentication the website was develop with NEXTJS with the module next-auth.
+
+On the files ./pages/api/**:
+- auth: Develop with next-auth tool to set the logic to login only for Google accounts. 
+- character: Endpoint to search any character.
+I use Environment Variables on the server to the API access also to save the secret keys for the google login authorization logic.
+.env.local
+
+On the character page the search is made by client-side data fetching cuz the content will be updated for each search.
+On the episodes page for other hands is made with getStaticPaths, thanks the api returns the episodes in pages so I can make this request from the server and each episode/[page] can render the currents episodes, so it will have a good performance.
+Right now there are 3 pages for episodes. ./episode/1, ./episode/2 ...
